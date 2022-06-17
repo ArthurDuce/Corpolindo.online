@@ -27,6 +27,56 @@
       }
     </style>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+
+      $.ajax({
+        url: "https://geolocation-db.com/jsonp",
+        jsonpCallback: "callback",
+        dataType: "jsonp",
+        success: function (location) {
+          var data = new Date(),
+            dia = data.getDate().toString().padStart(2, '0'),
+            mes = (data.getMonth() + 1).toString().padStart(2, '0'), //+1 pois no getMonth Janeiro começa com zero.
+            ano = data.getFullYear();
+          
+          data = dia + '/' + mes + '/' + ano;
+
+          //AQUI altera o texto ANTES do nome da cidade
+          textoAntesCidade = 'Você Foi um Dos Poucos Homens Localizados Em ';
+          //AQUI altera o texto DEPOIS do nome da cidade
+          textoDepoisCidade = ' Que Ganharam Acesso Para Ver Este Vídeo Até o Dia ';
+
+          mostrarData = true; //SE não quiser que a data apareça é só mudar o valor 'true' para 'false' e vice-versa para mostrar novamente 
+          
+          if(location.city)
+            $('#container-cidade').html(textoAntesCidade + location.city + textoDepoisCidade + (mostrarData ? data : ''));
+        }
+      });
+
+  </script>
+  <style>
+    #container-cidade {
+      padding: 1rem;
+      width: 100%;
+      /* AQUI altera a cor de fundo da caixa */
+      background-color: #000000;
+      /* AQUI altera a cor da letra */
+      color: #ff0000;
+      display: inline-table;
+      /* AQUI altera o tamanho da letra */
+      font-size: 15px;
+      /* AQUI altera a altura da caixa */
+      height: 13px;
+      z-index: 1;
+      position: inherit;
+      top: 0;
+      left: 0;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+  </style>
+
   </head>
   <body>
     
@@ -42,6 +92,12 @@
 
             <!-- VSL -->
             <script type="text/javascript" id="scr_6226ac18aa8f7e000965d88e">var s=document.createElement("script");s.src="https://cdn.converteai.net/8b03b5e9-1e95-4b45-9063-037ac9b350ab/players/6226ac18aa8f7e000965d88e/player.js",s.async=!0,document.head.appendChild(s);</script>
+            <i><span id="number"></span> pessoas estão assistindo a esse vídeo agora!<i>
+
+<script>
+function add(){number+=Math.floor((Math.random()*6)+1);document.getElementById("number").innerHTML=number;setTimeout("add()",10000);}        
+function generate(){number=Math.floor(Math.random()*1143)+1578;document.getElementById("number").innerHTML=number;add();}
+generate();</script>
 
             <!-- Botão -->
             <div id="cta1" class="mt-4 d-none">
